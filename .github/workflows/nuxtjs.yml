@@ -36,14 +36,22 @@ jobs:
         with:
           bun-version: latest
       - name: Setup Pages
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@v4
+        with:
+          # Automatically inject router.base in your Nuxt configuration file and set
+          # target to static (https://nuxtjs.org/docs/configuration-glossary/configuration-target/).
+          #
+          # You may remove this line if you want to manage the configuration yourself.
+          static_site_generator: nuxt
       - name: Install dependencies
         run: bun install
       - name: Build with Bun
         run: |
           bun run build
+      - name: Static HTML export with Nuxt
+        run: bun run generate
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
 

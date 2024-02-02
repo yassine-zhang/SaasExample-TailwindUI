@@ -4,6 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
+    "build:github-pages": "bun run build --preset=github_pages",
+    "deploy": "bun run build:github-pages && bunx gh-pages --dotfiles -d .output/public",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",

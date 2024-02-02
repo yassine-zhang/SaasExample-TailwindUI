@@ -10,9 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
+      - uses: oven-sh/setup-bun@v1.1.1
       # Pick your own package manager and build script
       - run: bun install
       - run: bun run build --preset=github_pages

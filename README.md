@@ -1,6 +1,6 @@
 ## 介绍
 
-&nbsp;&nbsp;这是一个基于 shadcn-vue + tailwindcss + nuxt3 的基础H5模版，它至少对目前我的情况来说会有益处。希望对你也有所帮助，你可以查看我部署到 github-pages 的演示效果：https://yassine-zhang.github.io/H5BasicTemplate/
+&nbsp;&nbsp;这是一个基于 tailwindcss + nuxt3 的基础H5模版，它至少对目前我的情况来说会有益处。希望对你也有所帮助，你可以查看我部署到 github-pages 的演示效果：https://yassine-zhang.github.io/H5BasicTemplate/
 
 如果这个基础项目你觉得确实有点用,可以 fork 下来用在自己的项目，感谢你的支持，有问题请提 issues。
 
@@ -21,17 +21,37 @@
    - `./lib/utils.ts` 文件中 `getRootPath` 函数内需要注意修改生产环境下的名称，这里对标 Github 仓库名称。
      - `return process.env.NODE_ENV === "production" ? "/H5BasicTemplate/" : "/"`;
    - 更多第三方托管部署的方式请参考：https://nuxt.com.cn/deploy
-2. 部署到自己服务器可使用 `bun run build` ，将 `.output/public` 文件夹内所有文件传到服务器某一指定位置即可。
+2. 本地部署可使用命令 `bun run build && bun .output/server/index.mjs`，如果你要在服务器部署，那么你需要与本地拥有相同的集成环境。
+3. 当然这个时候我会推荐你使用 docker 轻松解决部署耗费较长时间问题。关于使用 bun 构建 Docker 容器的 dockerfile 相关案例如下：（如果不懂请自行查阅资料）
 
-## 已添加 shadcn 组件
+   ```yaml
+   # 使用Bun的Alpine镜像
+   FROM oven/bun:alpine
 
-1. avatar
-2. navigation-menu
-3. separator
+   # 设置工作目录
+   WORKDIR /app
+
+   # 复制项目文件到工作目录
+   COPY . .
+
+   # 更改东八CST-8时区
+   RUN apk add tzdata \
+   && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+   && echo "Asia/Shanghai" > /etc/timezone
+
+   # 构建项目
+   RUN bun run build
+
+   # 设置容器运行时要监听的端口
+   EXPOSE 3000
+
+   # 设置一个init程序来处理信号和僵尸进程，运行应用程序
+   USER bun
+   ENTRYPOINT ["/sbin/tini", "--", "bun", ".output/server/index.mjs"]
+   ```
 
 ## 项目依赖解读
 
 1. Git 提交时自动整理格式化项目代码：`husky`、`prettier`、`lint-staged`。
-2. Icon 图标库：Nuxt3 使用 `lucide-vue-next` 作为默认图标库。
-3. Tailwind 样式预览：`tailwind-config-viewer`，本地可通过 `http://localhost:3000/_tailwind/` 地址访问。
-4. Wait for me to write more.
+2. Tailwind 样式预览：`tailwind-config-viewer`，本地可通过 `http://localhost:3000/_tailwind/` 地址访问。
+3. Wait for me to write more.

@@ -1,7 +1,9 @@
+<script setup lang="ts">
+const isOpen = ref<boolean>(false);
+</script>
 <template>
   <section class="bg-white dark:bg-gray-900">
     <nav
-      x-data="{ isOpen: false }"
       class="container p-6 mx-auto lg:flex lg:justify-between lg:items-center"
     >
       <div class="flex items-center justify-between">
@@ -16,14 +18,13 @@
         <!-- Mobile menu button -->
         <div class="flex lg:hidden">
           <button
-            x-cloak
             @click="isOpen = !isOpen"
             type="button"
             class="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400"
             aria-label="toggle menu"
           >
             <svg
-              x-show="!isOpen"
+              v-show="!isOpen"
               xmlns="http://www.w3.org/2000/svg"
               class="w-6 h-6"
               fill="none"
@@ -39,7 +40,7 @@
             </svg>
 
             <svg
-              x-show="isOpen"
+              v-show="isOpen"
               xmlns="http://www.w3.org/2000/svg"
               class="w-6 h-6"
               fill="none"
@@ -59,7 +60,6 @@
 
       <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
       <div
-        x-cloak
         :class="[
           isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full',
         ]"

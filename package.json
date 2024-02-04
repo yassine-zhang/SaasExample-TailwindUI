@@ -1,17 +1,5 @@
 {
   "name": "nuxt-app",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "nuxt build",
-    "build:github-pages": "bun run build --preset=github_pages",
-    "deploy": "bun run build:github-pages && bunx gh-pages --dotfiles -d .output/public",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "prepare": "husky install"
-  },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.11.2",
     "husky": "^8.0.0",
@@ -26,5 +14,17 @@
     "*.{js,cjs,mjs,md,ts,vue,json,css}": [
       "prettier --write"
     ]
-  }
+  },
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "build:github-pages": "bun run build --preset=github_pages",
+    "deploy": "bun run build:github-pages && bunx gh-pages --dotfiles -d .output/public",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "prepare": "husky install"
+  },
+  "type": "module"
 }

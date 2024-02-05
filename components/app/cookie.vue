@@ -4,7 +4,7 @@ const isOpen = ref<boolean>(true);
 <template>
   <section
     v-show="isOpen"
-    class="fixed max-w-md p-4 mx-auto bg-white border border-gray-200 dark:bg-gray-800 left-12 bottom-16 dark:border-gray-700 rounded-2xl"
+    class="z-50 fixed max-w-md p-4 mx-auto bg-white border border-gray-200 dark:bg-gray-800 left-12 bottom-16 dark:border-gray-700 rounded-2xl"
   >
     <h2 class="font-semibold text-gray-800 dark:text-white">
       🍪 Cookie Notice

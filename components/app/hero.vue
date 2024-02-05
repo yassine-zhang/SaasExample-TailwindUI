@@ -88,14 +88,19 @@ const isOpen = ref<boolean>(false);
             href="#"
             >Contact</a
           >
+          <NuxtLink
+            class="text-gray-700 transition-colors duration-300 transform lg:mx-8 dark:text-gray-200 dark:hover:text-blue-400 hover:text-blue-500"
+            to="/dashboard"
+            >Dashboard</NuxtLink
+          >
         </div>
 
-        <a
+        <NuxtLink
+          to="/start"
           class="block px-5 py-2 mt-4 text-sm text-center text-white capitalize bg-blue-600 rounded-lg lg:mt-0 hover:bg-blue-500 lg:w-auto"
-          href="#"
         >
           Get started
-        </a>
+        </NuxtLink>
       </div>
     </nav>
 

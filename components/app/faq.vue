@@ -1,184 +1,55 @@
 <template>
-  <section class="bg-white dark:bg-gray-900">
-    <div class="container overflow-hidden px-6 py-12 mx-auto">
-      <h1
-        class="text-2xl font-semibold text-center text-gray-800 lg:text-3xl dark:text-white"
-      >
-        Have any Questions?
-      </h1>
-
-      <div class="mt-8 xl:mt-16 lg:flex lg:-mx-12">
-        <div class="lg:mx-12">
-          <h1 class="text-xl font-semibold text-gray-800 dark:text-white">
-            Table of Content
-          </h1>
-
-          <div class="mt-4 space-y-4 lg:mt-8">
-            <a
-              href="#"
-              class="block text-blue-500 dark:text-blue-400 hover:underline"
-              >General</a
-            >
-            <a
-              href="#"
-              class="block text-gray-500 dark:text-gray-300 hover:underline"
-              >Trust & Safety</a
-            >
-            <a
-              href="#"
-              class="block text-gray-500 dark:text-gray-300 hover:underline"
-              >Services</a
-            >
-            <a
-              href="#"
-              class="block text-gray-500 dark:text-gray-300 hover:underline"
-              >Billing</a
-            >
-            <a
-              href="#"
-              class="block text-gray-500 dark:text-gray-300 hover:underline"
-              >Office Cleaning</a
-            >
+  <div class="bg-white">
+    <div class="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8">
+      <h2 class="text-2xl font-bold leading-10 tracking-tight text-gray-900">
+        Frequently asked questions
+      </h2>
+      <p class="mt-6 max-w-2xl text-base leading-7 text-gray-600">
+        Have a different question and can’t find the answer you’re looking for?
+        Reach out to our support team by
+        <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500"
+          >sending us an email</a
+        >
+        and we’ll get back to you as soon as we can.
+      </p>
+      <div class="mt-20">
+        <dl
+          class="space-y-16 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-16 sm:space-y-0 lg:grid-cols-3 lg:gap-x-10"
+        >
+          <div v-for="faq in faqs" :key="faq.id">
+            <dt class="text-base font-semibold leading-7 text-gray-900">
+              {{ faq.question }}
+            </dt>
+            <dd class="mt-2 text-base leading-7 text-gray-600">
+              {{ faq.answer }}
+            </dd>
           </div>
-        </div>
-
-        <div class="flex-1 mt-8 lg:mx-12 lg:mt-0">
-          <div>
-            <button class="flex items-center focus:outline-none">
-              <svg
-                class="flex-shrink-0 w-6 h-6 text-blue-500"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M20 12H4"
-                ></path>
-              </svg>
-
-              <h1 class="mx-4 text-xl text-gray-700 dark:text-white">
-                How i can play for my appoinment ?
-              </h1>
-            </button>
-
-            <div class="flex mt-8 md:mx-10">
-              <span class="border border-blue-500"></span>
-
-              <p class="max-w-3xl px-4 text-gray-500 dark:text-gray-300">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni,
-                eum quae. Harum officiis reprehenderit ex quia ducimus minima id
-                provident molestias optio nam vel, quidem iure voluptatem,
-                repellat et ipsa.
-              </p>
-            </div>
-          </div>
-
-          <hr class="my-8 border-gray-200 dark:border-gray-700" />
-
-          <div>
-            <button class="flex items-center focus:outline-none">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="flex-shrink-0 w-6 h-6 text-blue-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 4v16m8-8H4"
-                />
-              </svg>
-
-              <h1 class="mx-4 text-xl text-gray-700 dark:text-white">
-                What can i expect at my first consultation ?
-              </h1>
-            </button>
-          </div>
-
-          <hr class="my-8 border-gray-200 dark:border-gray-700" />
-
-          <div>
-            <button class="flex items-center focus:outline-none">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="flex-shrink-0 w-6 h-6 text-blue-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 4v16m8-8H4"
-                />
-              </svg>
-
-              <h1 class="mx-4 text-xl text-gray-700 dark:text-white">
-                What are your opening house ?
-              </h1>
-            </button>
-          </div>
-
-          <hr class="my-8 border-gray-200 dark:border-gray-700" />
-
-          <div>
-            <button class="flex items-center focus:outline-none">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="flex-shrink-0 w-6 h-6 text-blue-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 4v16m8-8H4"
-                />
-              </svg>
-
-              <h1 class="mx-4 text-xl text-gray-700 dark:text-white">
-                Do i need a referral ?
-              </h1>
-            </button>
-          </div>
-
-          <hr class="my-8 border-gray-200 dark:border-gray-700" />
-
-          <div>
-            <button class="flex items-center focus:outline-none">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="flex-shrink-0 w-6 h-6 text-blue-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 4v16m8-8H4"
-                />
-              </svg>
-
-              <h1 class="mx-4 text-xl text-gray-700 dark:text-white">
-                Is the cost of the appoinment covered by private health
-                insurance ?
-              </h1>
-            </button>
-          </div>
-        </div>
+        </dl>
       </div>
     </div>
-  </section>
+  </div>
 </template>
+
+<script setup>
+const faqs = [
+  {
+    id: 1,
+    question: "What's the best thing about Switzerland?",
+    answer:
+      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+  },
+  {
+    id: 2,
+    question: "How do you make holy water?",
+    answer:
+      "You boil the hell out of it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+  },
+  {
+    id: 3,
+    question: "Why do you never see elephants hiding in trees?",
+    answer:
+      "Because they're so good at it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+  },
+  // More questions...
+];
+</script>

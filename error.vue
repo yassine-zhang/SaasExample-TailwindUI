@@ -16,62 +16,86 @@ const props = defineProps({
 const handleError = () => clearError({ redirect: "/" });
 </script>
 <template>
-  <section class="bg-white dark:bg-gray-900">
-    <div
-      class="max-w-screen-lg min-h-screen px-6 py-12 mx-auto lg:flex lg:items-center lg:gap-12"
+  <!--
+    This example requires updating your template:
+
+    ```
+    <html class="h-full">
+    <body class="h-full">
+    ```
+  -->
+  <div
+    class="grid h-screen grid-cols-1 grid-rows-[1fr,auto,1fr] bg-white lg:grid-cols-[max(50%,36rem),1fr]"
+  >
+    <header
+      class="mx-auto w-full max-w-7xl px-6 pt-6 sm:pt-10 lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:px-8"
     >
-      <div class="wf-ull lg:w-1/2">
-        <p class="text-sm font-medium text-blue-500 dark:text-blue-400">
-          {{ error!.statusCode }} error
+      <a href="/">
+        <span class="sr-only">Your Company</span>
+        <img
+          class="h-10 w-auto sm:h-12"
+          src="https://hc1319-1300215870.file.myqcloud.com/img/logos/mark.svg?color=indigo&shade=600"
+          alt=""
+        />
+      </a>
+    </header>
+    <main
+      class="mx-auto w-full max-w-7xl px-6 py-24 sm:py-32 lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:px-8"
+    >
+      <div class="max-w-lg">
+        <p class="text-base font-semibold leading-8 text-indigo-600">
+          {{ error!.statusCode }}
         </p>
         <h1
-          class="mt-3 text-2xl font-semibold text-gray-800 dark:text-white md:text-3xl"
+          class="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl"
         >
           {{ error!.statusMessage }}
         </h1>
-        <p class="mt-4 text-gray-500 dark:text-gray-400">
-          Sorry, the page you are looking for doesn't exist.Here are some
-          helpful links:
+        <p class="mt-6 text-base leading-7 text-gray-600">
+          Sorry, we couldn’t find the page you’re looking for.
         </p>
-
-        <div class="flex items-center mt-6 gap-x-3">
-          <button
-            class="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-gray-200 dark:border-gray-700"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-5 h-5 rtl:rotate-180"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
-              />
-            </svg>
-
-            <span>Go back</span>
-          </button>
-
-          <button
+        <div class="mt-10">
+          <a
             @click="handleError"
-            class="w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600"
+            class="cursor-pointer text-sm font-semibold leading-7 text-indigo-600"
+            ><span aria-hidden="true">&larr;</span> Back to home</a
           >
-            Take me home
-          </button>
         </div>
       </div>
-
-      <div class="relative w-full mt-12 lg:w-1/2 lg:mt-0">
-        <img
-          class="w-full max-w-lg lg:mx-auto"
-          src="/error/illustration.svg"
-          alt=""
-        />
+    </main>
+    <footer class="self-end lg:col-span-2 lg:col-start-1 lg:row-start-3">
+      <div class="border-t border-gray-100 bg-gray-50 py-10">
+        <nav
+          class="mx-auto flex w-full max-w-7xl items-center gap-x-4 px-6 text-sm leading-7 text-gray-600 lg:px-8"
+        >
+          <a href="#">Contact support</a>
+          <svg
+            viewBox="0 0 2 2"
+            aria-hidden="true"
+            class="h-0.5 w-0.5 fill-gray-300"
+          >
+            <circle cx="1" cy="1" r="1" />
+          </svg>
+          <a href="#">Status</a>
+          <svg
+            viewBox="0 0 2 2"
+            aria-hidden="true"
+            class="h-0.5 w-0.5 fill-gray-300"
+          >
+            <circle cx="1" cy="1" r="1" />
+          </svg>
+          <a href="#">Twitter</a>
+        </nav>
       </div>
+    </footer>
+    <div
+      class="hidden lg:relative lg:col-start-2 lg:row-start-1 lg:row-end-4 lg:block"
+    >
+      <img
+        src="https://images.unsplash.com/photo-1470847355775-e0e3c35a9a2c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1825&q=80"
+        alt=""
+        class="absolute inset-0 h-full w-full object-cover"
+      />
     </div>
-  </section>
+  </div>
 </template>

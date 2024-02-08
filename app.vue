@@ -1,6 +1,3 @@
-<template>
-  <NuxtPage></NuxtPage>
-</template>
 <script setup lang="ts">
 import { getRootPath } from "@/lib/utils";
 
@@ -11,7 +8,17 @@ useHead({
     ];
   },
   title() {
-    return "网站宣传主页";
+    return "Saas产品模版";
   },
 });
 </script>
+<template>
+  <NuxtPage></NuxtPage>
+</template>
+<style>
+html {
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+    "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei",
+    sans-serif;
+}
+</style>

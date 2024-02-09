@@ -1,1 +1,0 @@
-import{_ as e}from"./_plugin-vue_export-helper.x3n3nnut.js";import{c as r,g as o}from"./entry.3U0uJRDQ.js";const c={},s={class:"border-4 border-dashed border-gray-200 rounded-lg h-96"};function a(d,t){return o(),r("div",s," Dashboard Page ")}const f=e(c,[["render",a]]);export{f as default};

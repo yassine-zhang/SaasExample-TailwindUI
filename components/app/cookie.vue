@@ -4,7 +4,8 @@ const isOpen = ref<boolean>(true);
 <template>
   <div
     v-show="isOpen"
-    class="z-50 fixed inset-x-0 bottom-0 flex flex-col justify-between gap-x-8 gap-y-4 bg-white p-6 ring-1 ring-gray-900/10 md:flex-row md:items-center lg:px-8"
+    style="box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px"
+    class="z-50 fixed inset-x-0 bottom-0 flex flex-col justify-between gap-x-8 gap-y-4 bg-white border-t border-gray-900/10 p-6 md:flex-row md:items-center lg:px-8"
   >
     <p class="max-w-4xl text-sm leading-6 text-gray-900">
       This website uses cookies to supplement a balanced diet and provide a much

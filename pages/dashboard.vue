@@ -78,21 +78,27 @@
                 class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4 ring-1 ring-white/10"
               >
                 <div class="flex h-16 shrink-0 items-center">
-                  <img
-                    class="h-8 w-auto"
-                    src="https://hc1319-1300215870.file.myqcloud.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
+                  <NuxtLink to="/">
+                    <img
+                      class="h-8 w-auto"
+                      src="https://hc1319-1300215870.file.myqcloud.com/img/logos/mark.svg?color=indigo&shade=500"
+                      alt="Your Company"
+                    />
+                  </NuxtLink>
                 </div>
                 <nav class="flex flex-1 flex-col">
                   <ul role="list" class="flex flex-1 flex-col gap-y-7">
                     <li>
                       <ul role="list" class="-mx-2 space-y-1">
-                        <li v-for="item in navigation" :key="item.name">
-                          <a
-                            :href="item.href"
+                        <li
+                          @click="selectTab(item.name)"
+                          v-for="item in navigation"
+                          :key="item.name"
+                        >
+                          <NuxtLink
+                            :to="item.href"
                             :class="[
-                              item.current
+                              isSelect(item.name)
                                 ? 'bg-gray-800 text-white'
                                 : 'text-gray-400 hover:text-white hover:bg-gray-800',
                               'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
@@ -104,7 +110,7 @@
                               aria-hidden="true"
                             />
                             {{ item.name }}
-                          </a>
+                          </NuxtLink>
                         </li>
                       </ul>
                     </li>
@@ -164,21 +170,27 @@
         class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4"
       >
         <div class="flex h-16 shrink-0 items-center">
-          <img
-            class="h-8 w-auto"
-            src="https://hc1319-1300215870.file.myqcloud.com/img/logos/mark.svg?color=indigo&shade=500"
-            alt="Your Company"
-          />
+          <NuxtLink to="/">
+            <img
+              class="h-8 w-auto"
+              src="https://hc1319-1300215870.file.myqcloud.com/img/logos/mark.svg?color=indigo&shade=500"
+              alt="Your Company"
+            />
+          </NuxtLink>
         </div>
         <nav class="flex flex-1 flex-col">
           <ul role="list" class="flex flex-1 flex-col gap-y-7">
             <li>
               <ul role="list" class="-mx-2 space-y-1">
-                <li v-for="item in navigation" :key="item.name">
-                  <a
-                    :href="item.href"
+                <li
+                  @click="selectTab(item.name)"
+                  v-for="item in navigation"
+                  :key="item.name"
+                >
+                  <NuxtLink
+                    :to="item.href"
                     :class="[
-                      item.current
+                      isSelect(item.name)
                         ? 'bg-gray-800 text-white'
                         : 'text-gray-400 hover:text-white hover:bg-gray-800',
                       'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
@@ -190,7 +202,7 @@
                       aria-hidden="true"
                     />
                     {{ item.name }}
-                  </a>
+                  </NuxtLink>
                 </li>
               </ul>
             </li>
@@ -336,6 +348,7 @@
       <main class="py-10">
         <div class="px-4 sm:px-6 lg:px-8">
           <!-- Your content -->
+          <NuxtPage />
         </div>
       </main>
     </div>
@@ -368,9 +381,11 @@ import {
 } from "@heroicons/vue/24/outline";
 import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
 
+const route = useRoute();
+
 const navigation = [
-  { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
-  { name: "Team", href: "#", icon: UsersIcon, current: false },
+  { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: true },
+  { name: "Team", href: "/dashboard/team", icon: UsersIcon, current: false },
   { name: "Projects", href: "#", icon: FolderIcon, current: false },
   { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
   { name: "Documents", href: "#", icon: DocumentDuplicateIcon, current: false },
@@ -387,4 +402,15 @@ const userNavigation = [
 ];
 
 const sidebarOpen = ref(false);
+
+function capitalizeFirstLetter(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+const selectedTab = ref(capitalizeFirstLetter(route.fullPath.split("/").pop()));
+selectedTab.value = selectedTab.value === "" ? "Dashboard" : selectedTab.value;
+const isSelect = (k) => selectedTab.value === k;
+const selectTab = (k) => {
+  selectedTab.value = k;
+  sidebarOpen.value = false;
+};
 </script>

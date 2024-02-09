@@ -1,6 +1,6 @@
 ## 介绍
 
-&nbsp;&nbsp;这是一个基于 tailwindcss + nuxt3 的基础H5模版，它至少对目前我的情况来说会有益处。希望对你也有所帮助，你可以查看我部署到 github-pages 的演示效果：https://yassine-zhang.github.io/H5BasicTemplate/
+&nbsp;&nbsp;这是一个基于 tailwindcss + nuxt3 的基础H5模版，它至少对目前我的情况来说会有益处。希望对你也有所帮助。
 
 如果这个基础项目你觉得确实有点用,可以 fork 下来用在自己的项目，感谢你的支持，有问题请提 issues。
 

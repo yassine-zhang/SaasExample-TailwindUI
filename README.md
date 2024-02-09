@@ -21,8 +21,8 @@
    - `./lib/utils.ts` 文件中 `getRootPath` 函数内需要注意修改生产环境下的名称，这里对标 Github 仓库名称。
      - `return process.env.NODE_ENV === "production" ? "/H5BasicTemplate/" : "/"`;
    - 更多第三方托管部署的方式请参考：https://nuxt.com.cn/deploy
-2. 本地部署可使用命令 `bun run build && bun .output/server/index.mjs`，如果你要在服务器部署，那么你需要与本地拥有相同的集成环境。
-3. 当然这个时候我会推荐你使用 docker 轻松解决部署耗费较长时间问题。关于使用 bun 构建 Docker 容器的 dockerfile 相关案例如下：（如果不懂请自行查阅资料）
+   - 如果你只是做效果演示，可以第三方托管部署，比较方便的是 vercel，我并不推荐 github-pages。
+2. 部署到自己服务器，这个时候我会推荐你使用 docker 轻松解决部署耗费较长时间问题。关于使用 bun 构建 Docker 容器的 dockerfile 相关案例如下：（如果不懂请自行查阅资料）
 
    ```yaml
    # 使用Bun的Alpine镜像

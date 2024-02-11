@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { getRootPath } from "@/lib/utils";
+// import { getRootPath } from "@/lib/utils";
 
 useHead({
   link() {
     return [
-      { rel: "icon", type: "image/png", href: `${getRootPath()}favicon.ico` },
+      // { rel: "icon", type: "image/png", href: `${getRootPath()}favicon.ico` },
+      { rel: "icon", type: "image/png", href: '/favicon.ico' },
     ];
   },
   title() {

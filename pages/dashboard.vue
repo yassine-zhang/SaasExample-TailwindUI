@@ -81,7 +81,7 @@
                   <NuxtLink to="/">
                     <img
                       class="h-8 w-auto"
-                      src="/favicon.svg"
+                      src="https://hc1319-1300215870.file.myqcloud.com/img/logos/mark.svg?color=indigo&shade=600"
                       alt="Your Company"
                     />
                   </NuxtLink>
@@ -150,7 +150,7 @@
       >
         <div class="flex h-16 shrink-0 items-center">
           <NuxtLink to="/">
-            <img class="h-8 w-auto" src="/favicon.svg" alt="Your Company" />
+            <img class="h-8 w-auto" src="https://hc1319-1300215870.file.myqcloud.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" />
           </NuxtLink>
         </div>
         <nav class="flex flex-1 flex-col">

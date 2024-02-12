@@ -75,13 +75,13 @@
               </TransitionChild>
               <!-- Sidebar component, swap this element with another sidebar if you like -->
               <div
-                class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4 ring-1 ring-white/10"
+                class="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4 ring-1 ring-white/10"
               >
                 <div class="flex h-16 shrink-0 items-center">
                   <NuxtLink to="/">
                     <img
                       class="h-8 w-auto"
-                      src="https://hc1319-1300215870.file.myqcloud.com/img/logos/mark.svg?color=indigo&shade=500"
+                      src="/favicon.svg"
                       alt="Your Company"
                     />
                   </NuxtLink>
@@ -99,14 +99,19 @@
                             :to="item.href"
                             :class="[
                               isSelect(item.name)
-                                ? 'bg-gray-800 text-white'
-                                : 'text-gray-400 hover:text-white hover:bg-gray-800',
+                                ? 'bg-gray-50 text-indigo-600'
+                                : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
                               'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
                             ]"
                           >
                             <component
                               :is="item.icon"
-                              class="h-6 w-6 shrink-0"
+                              :class="[
+                                isSelect(item.name)
+                                  ? 'text-indigo-600'
+                                  : 'text-gray-400 group-hover:text-indigo-600',
+                                'h-6 w-6 shrink-0',
+                              ]"
                               aria-hidden="true"
                             />
                             {{ item.name }}
@@ -114,39 +119,13 @@
                         </li>
                       </ul>
                     </li>
-                    <li>
-                      <div
-                        class="text-xs font-semibold leading-6 text-gray-400"
-                      >
-                        Your teams
-                      </div>
-                      <ul role="list" class="-mx-2 mt-2 space-y-1">
-                        <li v-for="team in teams" :key="team.name">
-                          <a
-                            :href="team.href"
-                            :class="[
-                              team.current
-                                ? 'bg-gray-800 text-white'
-                                : 'text-gray-400 hover:text-white hover:bg-gray-800',
-                              'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
-                            ]"
-                          >
-                            <span
-                              class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white"
-                              >{{ team.initial }}</span
-                            >
-                            <span class="truncate">{{ team.name }}</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
                     <li class="mt-auto">
                       <a
                         href="#"
-                        class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
+                        class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
                       >
                         <Cog6ToothIcon
-                          class="h-6 w-6 shrink-0"
+                          class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
                           aria-hidden="true"
                         />
                         Settings
@@ -167,15 +146,11 @@
     >
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div
-        class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4"
+        class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4"
       >
         <div class="flex h-16 shrink-0 items-center">
           <NuxtLink to="/">
-            <img
-              class="h-8 w-auto"
-              src="https://hc1319-1300215870.file.myqcloud.com/img/logos/mark.svg?color=indigo&shade=500"
-              alt="Your Company"
-            />
+            <img class="h-8 w-auto" src="/favicon.svg" alt="Your Company" />
           </NuxtLink>
         </div>
         <nav class="flex flex-1 flex-col">
@@ -191,14 +166,19 @@
                     :to="item.href"
                     :class="[
                       isSelect(item.name)
-                        ? 'bg-gray-800 text-white'
-                        : 'text-gray-400 hover:text-white hover:bg-gray-800',
-                      'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
+                        ? 'bg-gray-50 text-indigo-600'
+                        : 'text-gray-500 hover:text-gray-700 hover:pl-5',
+                      'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-300',
                     ]"
                   >
                     <component
                       :is="item.icon"
-                      class="h-6 w-6 shrink-0"
+                      :class="[
+                        isSelect(item.name)
+                          ? 'text-indigo-600'
+                          : 'text-gray-400 group-hover:text-gray-600',
+                        'h-6 w-6 shrink-0 transition-colors duration-300',
+                      ]"
                       aria-hidden="true"
                     />
                     {{ item.name }}
@@ -206,36 +186,15 @@
                 </li>
               </ul>
             </li>
-            <li>
-              <div class="text-xs font-semibold leading-6 text-gray-400">
-                Your teams
-              </div>
-              <ul role="list" class="-mx-2 mt-2 space-y-1">
-                <li v-for="team in teams" :key="team.name">
-                  <a
-                    :href="team.href"
-                    :class="[
-                      team.current
-                        ? 'bg-gray-800 text-white'
-                        : 'text-gray-400 hover:text-white hover:bg-gray-800',
-                      'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
-                    ]"
-                  >
-                    <span
-                      class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white"
-                      >{{ team.initial }}</span
-                    >
-                    <span class="truncate">{{ team.name }}</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
             <li class="mt-auto">
               <a
                 href="#"
-                class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
+                class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-500 hover:text-gray-700 hover:pl-5 transition-all duration-300"
               >
-                <Cog6ToothIcon class="h-6 w-6 shrink-0" aria-hidden="true" />
+                <Cog6ToothIcon
+                  class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-gray-600 transition-colors duration-300"
+                  aria-hidden="true"
+                />
                 Settings
               </a>
             </li>
@@ -304,7 +263,7 @@
                     <span
                       class="ml-4 text-sm font-semibold leading-6 text-gray-900"
                       aria-hidden="true"
-                      >Tom Cook</span
+                      >Yassine Zhang</span
                     >
                     <ChevronDownIcon
                       class="ml-2 h-5 w-5 text-gray-400"
@@ -390,11 +349,6 @@ const navigation = [
   { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
   { name: "Documents", href: "#", icon: DocumentDuplicateIcon, current: false },
   { name: "Reports", href: "#", icon: ChartPieIcon, current: false },
-];
-const teams = [
-  { id: 1, name: "Heroicons", href: "#", initial: "H", current: false },
-  { id: 2, name: "Tailwind Labs", href: "#", initial: "T", current: false },
-  { id: 3, name: "Workcation", href: "#", initial: "W", current: false },
 ];
 const userNavigation = [
   { name: "Your profile", href: "#" },

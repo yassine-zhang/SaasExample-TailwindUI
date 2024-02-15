@@ -5,7 +5,7 @@ useHead({
   link() {
     return [
       // { rel: "icon", type: "image/png", href: `${getRootPath()}favicon.ico` },
-      { rel: "icon", type: "image/png", href: '/favicon.ico' },
+      { rel: "icon", type: "image/png", href: "/favicon.ico" },
     ];
   },
   title() {
@@ -21,5 +21,6 @@ html {
   font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC",
     "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei",
     sans-serif;
+  background-color: #f9fafb;
 }
 </style>

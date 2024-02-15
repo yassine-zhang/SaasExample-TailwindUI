@@ -25,7 +25,7 @@
     <TransitionRoot as="template" :show="sidebarOpen">
       <Dialog
         as="div"
-        class="relative z-50 lg:hidden"
+        class="relative z-10 lg:hidden"
         @close="sidebarOpen = false"
       >
         <TransitionChild
@@ -81,7 +81,7 @@
                   <NuxtLink to="/">
                     <img
                       class="h-8 w-auto"
-                      src="https://hc1319-1300215870.file.myqcloud.com/img/logos/mark.svg?color=indigo&shade=600"
+                      src="/favicon.svg"
                       alt="Your Company"
                     />
                   </NuxtLink>
@@ -142,7 +142,7 @@
 
     <!-- Static sidebar for desktop -->
     <div
-      class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col"
+      class="hidden lg:fixed lg:inset-y-0 lg:z-10 lg:flex lg:w-72 lg:flex-col"
     >
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div
@@ -150,7 +150,7 @@
       >
         <div class="flex h-16 shrink-0 items-center">
           <NuxtLink to="/">
-            <img class="h-8 w-auto" src="https://hc1319-1300215870.file.myqcloud.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" />
+            <img class="h-8 w-auto" src="/favicon.svg" alt="Your Company" />
           </NuxtLink>
         </div>
         <nav class="flex flex-1 flex-col">
@@ -205,7 +205,7 @@
 
     <div class="lg:pl-72">
       <div
-        class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8"
+        class="sticky top-0 z-10 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8"
       >
         <button
           type="button"
@@ -220,20 +220,33 @@
         <div class="h-6 w-px bg-gray-900/10 lg:hidden" aria-hidden="true" />
 
         <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-          <form class="relative flex flex-1" action="#" method="GET">
-            <label for="search-field" class="sr-only">Search</label>
-            <MagnifyingGlassIcon
-              class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-400"
-              aria-hidden="true"
-            />
-            <input
-              id="search-field"
-              class="block h-full w-full border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
-              placeholder="Search..."
-              type="search"
-              name="search"
-            />
-          </form>
+          <div class="relative flex items-center flex-1 my-3.5">
+            <div
+              @click="
+                () => {
+                  commandPalettes = true;
+                }
+              "
+              class="flex relative items-center cursor-pointer border rounded-md w-full h-full max-w-md md:pr-56 hover:bg-gray-100 transition-colors"
+            >
+              <span class="sr-only">Search</span>
+              <MagnifyingGlassIcon
+                class="pointer-events-none absolute inset-y-0 left-2 h-full w-5 text-gray-400"
+                aria-hidden="true"
+              />
+              <span class="pl-10 text-gray-400 sm:text-sm"> Search </span>
+              <span
+                :class="[
+                  'ml-3 flex-none text-xs font-semibold',
+                  'text-gray-400',
+                  'absolute right-1 rounded-md p-0.5 sm:p-1 bg-gray-50 border',
+                ]"
+              >
+                <kbd class="font-sans">⌘</kbd>
+                <kbd class="font-sans">{{ commandPalettesShortcut }}</kbd>
+              </span>
+            </div>
+          </div>
           <div class="flex items-center gap-x-4 lg:gap-x-6">
             <button
               type="button"
@@ -256,7 +269,7 @@
                   <span class="sr-only">Open user menu</span>
                   <img
                     class="h-8 w-8 rounded-full bg-gray-50"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    src="/user/avatar.avif"
                     alt=""
                   />
                   <span class="hidden lg:flex lg:items-center">
@@ -304,7 +317,7 @@
         </div>
       </div>
 
-      <main class="py-10">
+      <main class="py-10 bg-gray-50">
         <div class="px-4 sm:px-6 lg:px-8">
           <!-- Your content -->
           <NuxtPage />
@@ -312,6 +325,7 @@
       </main>
     </div>
   </div>
+  <DashboardCommandPalettes v-model:open="commandPalettes" />
 </template>
 
 <script setup>
@@ -356,15 +370,36 @@ const userNavigation = [
 ];
 
 const sidebarOpen = ref(false);
+const commandPalettes = ref(false);
 
+const commandPalettesShortcut = ref("K");
+
+// 将 url 有效路径指定部分分割出来大写，之后将其赋予被选中对象。
 function capitalizeFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 const selectedTab = ref(capitalizeFirstLetter(route.fullPath.split("/").pop()));
-selectedTab.value = selectedTab.value === "" ? "Dashboard" : selectedTab.value;
 const isSelect = (k) => selectedTab.value === k;
 const selectTab = (k) => {
   selectedTab.value = k;
   sidebarOpen.value = false;
 };
+onMounted(() => {
+  // 设置快捷键监听事件
+  // 监听键盘按下事件
+  window.addEventListener("keydown", function (event) {
+    // 根据操作系统和按键判断
+    if (
+      (event.metaKey || event.ctrlKey) && // 检测 Command 键或 Ctrl 键
+      event.key === commandPalettesShortcut.value.toLowerCase() // 检测 K 键
+    ) {
+      // 在控制台输出按下 Command+K
+      // console.log("Command+K pressed");
+      commandPalettes.value = !commandPalettes.value;
+    }
+  });
+  // 检测选择的标签是否为空，空的话直接导向到第一个
+  selectedTab.value =
+    selectedTab.value === "" ? "Dashboard" : selectedTab.value;
+});
 </script>

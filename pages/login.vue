@@ -28,11 +28,7 @@
       <div class="mx-auto w-full max-w-sm lg:w-96">
         <div>
           <NuxtLink class="inline-block" to="/">
-            <img
-              class="h-10 w-auto"
-              src="https://hc1319-1300215870.file.myqcloud.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt="Your Company"
-            />
+            <img class="h-10 w-auto" src="/favicon.svg" alt="Your Company" />
           </NuxtLink>
           <h2
             class="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900"

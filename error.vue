@@ -32,11 +32,7 @@ const handleError = () => clearError({ redirect: "/" });
     >
       <a href="/">
         <span class="sr-only">Your Company</span>
-        <img
-          class="h-10 w-auto sm:h-12"
-          src="https://hc1319-1300215870.file.myqcloud.com/img/logos/mark.svg?color=indigo&shade=600"
-          alt=""
-        />
+        <img class="h-10 w-auto sm:h-12" src="/favicon.svg" alt="" />
       </a>
     </header>
     <main

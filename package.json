@@ -1,6 +1,7 @@
 {
   "name": "nuxt-app",
   "devDependencies": {
+    "@bg-dev/nuxt-naiveui": "^1.10.2",
     "@nuxtjs/tailwindcss": "^6.11.2",
     "husky": "^8.0.0",
     "lint-staged": "^15.2.0",
@@ -29,6 +30,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@heroicons/vue": "^2.1.1"
+    "@heroicons/vue": "^2.1.1",
+    "lucide-vue-next": "^0.331.0"
   }
 }

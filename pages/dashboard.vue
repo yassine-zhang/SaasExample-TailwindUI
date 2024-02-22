@@ -21,6 +21,10 @@
     <body class="h-full">
     ```
   -->
+  <div
+    ref="dragLayer"
+    class="absolute top-0 left-0 w-screen h-screen cursor-col-resize -z-50"
+  ></div>
   <div>
     <TransitionRoot as="template" :show="sidebarOpen">
       <Dialog
@@ -75,18 +79,30 @@
               </TransitionChild>
               <!-- Sidebar component, swap this element with another sidebar if you like -->
               <div
-                class="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4 ring-1 ring-white/10"
+                class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-100 pb-4 ring-1 ring-white/10"
               >
-                <div class="flex h-16 shrink-0 items-center">
-                  <NuxtLink to="/">
-                    <img
-                      class="h-8 w-auto"
-                      src="/favicon.svg"
-                      alt="Your Company"
+                <div
+                  class="flex h-16 shrink-0 items-center bg-gray-50 px-6 border-b"
+                >
+                  <div class="flex gap-2 items-center">
+                    <NuxtLink to="/">
+                      <img
+                        class="h-8 w-auto"
+                        src="/favicon.svg"
+                        alt="Your Company"
+                      />
+                    </NuxtLink>
+                    <h1 class="font-medium">Logo</h1>
+                  </div>
+                  <div
+                    class="ml-auto rounded-full p-1 border cursor-pointer hover:bg-gray-100 transition-colors group"
+                  >
+                    <Cog6ToothIcon
+                      class="w-5 text-gray-500 group-hover:text-indigo-600 transition-colors"
                     />
-                  </NuxtLink>
+                  </div>
                 </div>
-                <nav class="flex flex-1 flex-col">
+                <nav class="flex flex-1 flex-col px-7">
                   <ul role="list" class="flex flex-1 flex-col gap-y-7">
                     <li>
                       <ul role="list" class="-mx-2 space-y-1">
@@ -99,9 +115,9 @@
                             :to="item.href"
                             :class="[
                               isSelect(item.name)
-                                ? 'bg-gray-50 text-indigo-600'
-                                : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                              'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
+                                ? 'bg-gray-300/30'
+                                : 'hover:bg-gray-300/30',
+                              'group flex gap-x-3 p-2 text-sm leading-6 rounded-sm transition-all duration-100',
                             ]"
                           >
                             <component
@@ -109,8 +125,8 @@
                               :class="[
                                 isSelect(item.name)
                                   ? 'text-indigo-600'
-                                  : 'text-gray-400 group-hover:text-indigo-600',
-                                'h-6 w-6 shrink-0',
+                                  : 'text-gray-500 group-hover:text-indigo-600',
+                                'h-6 w-6 shrink-0 transition-colors duration-100',
                               ]"
                               aria-hidden="true"
                             />
@@ -118,18 +134,6 @@
                           </NuxtLink>
                         </li>
                       </ul>
-                    </li>
-                    <li class="mt-auto">
-                      <a
-                        href="#"
-                        class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
-                      >
-                        <Cog6ToothIcon
-                          class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
-                          aria-hidden="true"
-                        />
-                        Settings
-                      </a>
                     </li>
                   </ul>
                 </nav>
@@ -142,18 +146,35 @@
 
     <!-- Static sidebar for desktop -->
     <div
-      class="hidden lg:fixed lg:inset-y-0 lg:z-10 lg:flex lg:w-72 lg:flex-col"
+      ref="leftPanel"
+      :class="[
+        isCollapse() ? 'duration-300' : 'duration-0',
+        'hidden lg:fixed lg:inset-y-0 lg:z-10 lg:flex lg:w-64 lg:flex-col transition-all',
+      ]"
     >
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div
-        class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4"
+        class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-gray-100 pb-4"
       >
-        <div class="flex h-16 shrink-0 items-center">
-          <NuxtLink to="/">
-            <img class="h-8 w-auto" src="/favicon.svg" alt="Your Company" />
-          </NuxtLink>
+        <div
+          class="flex w-auto h-16 shrink-0 items-center bg-gray-50 px-6 border-b transition-all"
+        >
+          <div class="flex gap-2 items-center">
+            <NuxtLink to="/">
+              <img class="h-8 w-auto" src="/favicon.svg" alt="Your Company" />
+            </NuxtLink>
+            <h1 v-show="!collapse" class="font-medium">Logo</h1>
+          </div>
+          <div
+            v-show="!collapse"
+            class="ml-auto rounded-full p-1 border cursor-pointer hover:bg-gray-100 transition-colors group"
+          >
+            <Cog6ToothIcon
+              class="w-5 text-gray-500 group-hover:text-indigo-600 transition-colors"
+            />
+          </div>
         </div>
-        <nav class="flex flex-1 flex-col">
+        <nav :class="[isCollapse() ? 'px-5' : 'px-7', 'flex flex-1 flex-col']">
           <ul role="list" class="flex flex-1 flex-col gap-y-7">
             <li>
               <ul role="list" class="-mx-2 space-y-1">
@@ -162,50 +183,48 @@
                   v-for="item in navigation"
                   :key="item.name"
                 >
-                  <NuxtLink
-                    :to="item.href"
-                    :class="[
-                      isSelect(item.name)
-                        ? 'bg-gray-50 text-indigo-600'
-                        : 'text-gray-500 hover:text-gray-700 hover:pl-5',
-                      'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-300',
-                    ]"
+                  <n-tooltip
+                    placement="right"
+                    trigger="hover"
+                    :disabled="!isCollapse()"
                   >
-                    <component
-                      :is="item.icon"
-                      :class="[
-                        isSelect(item.name)
-                          ? 'text-indigo-600'
-                          : 'text-gray-400 group-hover:text-gray-600',
-                        'h-6 w-6 shrink-0 transition-colors duration-300',
-                      ]"
-                      aria-hidden="true"
-                    />
-                    {{ item.name }}
-                  </NuxtLink>
+                    <template #trigger>
+                      <NuxtLink
+                        :to="item.href"
+                        :class="[
+                          isSelect(item.name)
+                            ? 'bg-gray-300/30'
+                            : 'hover:bg-gray-300/30',
+                          isCollapse() ? 'justify-center' : 'justify-normal',
+                          'group flex gap-x-3 p-2 text-sm leading-6 rounded-sm transition-all',
+                        ]"
+                      >
+                        <component
+                          :is="item.icon"
+                          :class="[
+                            isSelect(item.name)
+                              ? 'text-indigo-600'
+                              : 'text-gray-500 group-hover:text-indigo-600',
+                            'h-6 w-6 shrink-0 transition-colors',
+                          ]"
+                          aria-hidden="true"
+                        />
+                        <span v-show="!collapse">{{ item.name }}</span>
+                      </NuxtLink>
+                    </template>
+                    <span> {{ item.name }} </span>
+                  </n-tooltip>
                 </li>
               </ul>
-            </li>
-            <li class="mt-auto">
-              <a
-                href="#"
-                class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-500 hover:text-gray-700 hover:pl-5 transition-all duration-300"
-              >
-                <Cog6ToothIcon
-                  class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-gray-600 transition-colors duration-300"
-                  aria-hidden="true"
-                />
-                Settings
-              </a>
             </li>
           </ul>
         </nav>
       </div>
     </div>
 
-    <div class="lg:pl-72">
+    <div ref="rightPanel" class="lg:pl-64">
       <div
-        class="sticky top-0 z-10 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8"
+        class="sticky top-0 z-10 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 sm:gap-x-6 sm:px-6 lg:px-8"
       >
         <button
           type="button"
@@ -215,6 +234,16 @@
           <span class="sr-only">Open sidebar</span>
           <Bars3Icon class="h-6 w-6" aria-hidden="true" />
         </button>
+        <div
+          ref="dragButton"
+          @mousedown="startDrag"
+          class="hidden lg:block absolute shadow-md hover:shadow-none -left-4 top-4 ml-auto rounded-full p-1 border cursor-col-resize bg-white hover:bg-gray-100 transition-all group"
+        >
+          <ChevronsLeftRight
+            strokeWidth="1.75"
+            class="w-5 h-5 text-gray-500 group-hover:text-indigo-600 transition-colors"
+          />
+        </div>
 
         <!-- Separator -->
         <div class="h-6 w-px bg-gray-900/10 lg:hidden" aria-hidden="true" />
@@ -317,7 +346,7 @@
         </div>
       </div>
 
-      <main class="py-10 bg-gray-50">
+      <main class="py-10">
         <div class="px-4 sm:px-6 lg:px-8">
           <!-- Your content -->
           <NuxtPage />
@@ -328,31 +357,22 @@
   <DashboardCommandPalettes v-model:open="commandPalettes" />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
-import {
-  Dialog,
-  DialogPanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-  TransitionChild,
-  TransitionRoot,
-} from "@headlessui/vue";
 import {
   Bars3Icon,
   BellIcon,
   CalendarIcon,
   ChartPieIcon,
-  Cog6ToothIcon,
   DocumentDuplicateIcon,
   FolderIcon,
   HomeIcon,
   UsersIcon,
   XMarkIcon,
+  Cog6ToothIcon,
 } from "@heroicons/vue/24/outline";
 import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
+import { ChevronsLeftRight } from "lucide-vue-next";
 
 const route = useRoute();
 
@@ -375,15 +395,83 @@ const commandPalettes = ref(false);
 const commandPalettesShortcut = ref("K");
 
 // 将 url 有效路径指定部分分割出来大写，之后将其赋予被选中对象。
-function capitalizeFirstLetter(str) {
+function capitalizeFirstLetter(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
-const selectedTab = ref(capitalizeFirstLetter(route.fullPath.split("/").pop()));
-const isSelect = (k) => selectedTab.value === k;
-const selectTab = (k) => {
+const selectedTab = ref(
+  capitalizeFirstLetter(route.fullPath.split("/").pop()!),
+);
+const isSelect = (k: string) => selectedTab.value === k;
+const selectTab = (k: string) => {
   selectedTab.value = k;
   sidebarOpen.value = false;
 };
+
+const dragButton = ref<HTMLElement>();
+const dragLayer = ref<HTMLElement>();
+const leftPanel = ref<HTMLElement>();
+const rightPanel = ref<HTMLElement>();
+
+const collapse = ref(false);
+let isDragging = false;
+let startX = 0;
+let startWidth = 0;
+let maxWidth = 360;
+let collapseThreshold = 180; // 80
+
+const isCollapse = () => collapse.value;
+
+const startDrag = (e: any) => {
+  e.preventDefault();
+
+  if (e.touches) {
+    startX = e.touches[0].clientX;
+  } else {
+    startX = e.clientX;
+  }
+
+  startWidth = parseFloat(getComputedStyle(leftPanel.value!).width);
+  isDragging = true;
+
+  dragLayer.value?.classList.replace("-z-50", "z-50");
+  dragLayer.value?.addEventListener("mousemove", doDrag);
+};
+
+const doDrag = (e: any) => {
+  if (!isDragging) return;
+
+  let currentX = 0;
+
+  if (e.touches) {
+    currentX = e.touches[0].clientX;
+  } else {
+    currentX = e.clientX;
+  }
+
+  let deltaX = currentX - startX;
+  let newWidth = startWidth + deltaX;
+
+  newWidth = Math.min(maxWidth, newWidth);
+  newWidth = Math.max(collapseThreshold, newWidth);
+  if (newWidth === collapseThreshold) {
+    newWidth = 80;
+
+    collapse.value = true;
+  } else if (newWidth > collapseThreshold) {
+    collapse.value = false;
+  }
+
+  leftPanel.value!.style.width = newWidth + "px";
+  rightPanel.value!.style.paddingLeft = newWidth + "px";
+};
+
+const stopDrag = () => {
+  isDragging = false;
+
+  dragLayer.value?.classList.replace("z-50", "-z-50");
+  dragLayer.value?.removeEventListener("mousemove", doDrag);
+};
+
 onMounted(() => {
   // 设置快捷键监听事件
   // 监听键盘按下事件
@@ -401,5 +489,21 @@ onMounted(() => {
   // 检测选择的标签是否为空，空的话直接导向到第一个
   selectedTab.value =
     selectedTab.value === "" ? "Dashboard" : selectedTab.value;
+
+  // 鼠标抬起时自动做停止拖拽动作
+  leftPanel.value?.addEventListener("mouseup", stopDrag);
+  rightPanel.value?.addEventListener("mouseup", stopDrag);
+  document.body.addEventListener("mouseup", stopDrag);
+
+  // 当屏幕宽度小于lg 1024px时清理掉rightPanel的内边距以及leftPanel的宽度
+  let once = true;
+  window.addEventListener("resize", () => {
+    if (window.innerWidth < 1024 && once) {
+      once = false;
+      collapse.value = false;
+      rightPanel.value?.style.removeProperty("padding-left");
+      leftPanel.value?.style.removeProperty("width");
+    } else if (window.innerWidth >= 1024) once = true;
+  });
 });
 </script>

@@ -4,6 +4,10 @@
 
 如果这个基础项目你觉得确实有点用,可以 fork 下来用在自己的项目，感谢你的支持，有问题请提 issues。
 
+## 效果演示
+
+![](./public/demo/media.png)
+
 ## 本地运行
 
 > 注意下文提到的 bun 与 npm、 pnpm、 yarn 具有相同作用，但远不止这些，它还完全兼容 NodeJS 所有功能，执行速度更快，意在替代 NodeJS 的存在，从23年起受到国外用户广泛使用。
@@ -14,6 +18,16 @@
 - 项目构建（使用github-pages预设）：`bun run build:github-pages`
 - 构建后预览：`bun run preview`
 - 部署到远程gh-pages分支：`bun run deploy`
+
+## 有效目录
+
+> 具体请查看项目 `pages` 目录
+
+- /
+- /login
+- /dashboard
+- /dashboard/~
+- 其他路径为一个错误页面。
 
 ## 部署
 

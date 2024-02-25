@@ -392,12 +392,8 @@ const commandPalettes = ref(false);
 
 const commandPalettesShortcut = ref("K");
 
-// 将 url 有效路径指定部分分割出来大写，之后将其赋予被选中对象。
-function capitalizeFirstLetter(str: string) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
 const selectedTab = ref(
-  capitalizeFirstLetter(route.fullPath.split("/").pop()!),
+  navigation.filter((val) => val.href === route.fullPath)[0].name,
 );
 const isSelect = (k: string) => selectedTab.value === k;
 const selectTab = (k: string) => {

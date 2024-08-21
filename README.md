@@ -69,3 +69,6 @@
 1. Git 提交时自动整理格式化项目代码：`husky`、`prettier`、`lint-staged`。
 2. Tailwind 样式预览：`tailwind-config-viewer`，本地可通过 `http://localhost:3000/_tailwind/` 地址访问。
 3. Wait for me to write more.
+
+## 其他
+[CSDN使用5积分下载24年TailwindUI专业版](https://download.csdn.net/download/weixin_46679824/88833456)
